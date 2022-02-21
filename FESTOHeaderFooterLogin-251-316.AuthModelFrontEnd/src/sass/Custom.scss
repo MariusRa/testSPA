@@ -1,0 +1,191 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+.container-fluid {
+  font-family: 'MetaPro-Normal', sans-serif;
+
+  header {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: #ffffff;
+    border-bottom: black 1px solid;
+
+
+    .log-in-festo{
+      margin-top: 10px;
+      margin-right: 20px;
+    }
+
+    .logo {
+      height: 20px;
+    }
+
+    Nav {
+      text-decoration: none;
+    }
+
+
+    a {
+      vertical-align: -0.6em;
+      color: #333333;
+      text-decoration: none;
+      font-size: 16px;
+      align-items: start;
+    }
+
+    .logIn:hover {
+      color: #0587cb;
+    }
+
+    .headerHome{
+      position: relative;
+      margin-right: 10px;
+    }
+
+    .active::after{
+      content:'';
+      position:absolute;
+      width: 100%;
+      height: 0;
+      left:0;
+      bottom: -26.3px;                    /* <- distance */
+      border-bottom: #0587cb 5px solid;
+    }
+    .headerHome:hover::after{
+      content:'';
+      position:absolute;
+      width: 100%;
+      height: 0;
+      left:0;
+      bottom: -26.3px;                    /* <- distance */
+      border-bottom: #0587cb 5px solid;
+    }
+    .headerHome:hover {
+      color: #0587cb;
+    }
+
+    .logIn {
+      margin-right: 20px;
+      margin-left: 5px;
+    }
+
+    .UserIcon {
+      height: 12px;
+      vertical-align: 0;
+    }
+  }
+}
+
+table{
+  display: block;
+  height:400px;
+  overflow-y:scroll;
+  width:100%;
+  thead{
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: #e5e5e5;
+    th:after,
+    th:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+    }
+
+    th:before {
+      top: -1px;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    th:after {
+      bottom: -1px;
+      border-bottom: 2px solid black;
+    }
+  }
+  td{
+    z-index: -1;
+  }
+}
+  .mailDiv{
+    width: 20%;
+    height: 625px;
+  }
+.h1test{
+  text-align: center;
+}
+.testText{
+  text-align: justify;
+}
+
+footer{
+  background-color: #f2f3f5;
+
+  .footer-links a{
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    color: #99a9b4;
+    text-align: right;
+    margin-right: 22px;
+    margin-bottom: 25px;
+  }
+  .lastA{
+    margin-right: 0 !important;
+  }
+  .footer-copyright{
+    text-align: left;
+    color:  #99a9b4;
+    font-size: 12px;
+  }
+
+  .footer-right , .footer-left{
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  .footer-left{
+    width: 50%;
+    bottom: 0;
+  }
+
+  .footer-right{
+    width: 40%;
+    text-align: right;
+  }
+
+  .afooter {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+
+  }
+}
+
+.formU {
+  height: 460px;
+  margin-bottom: 40px;
+}
+
+.formR {
+  height: 200px;
+}
+.search {
+  margin-top: 25px;
+  width: 32%
+}
+.hText {
+  margin-top: 10px;
+}
+
+.hLabel {
+  margin: 10px 0 10px 0;
+}
+
+.btn-group-vertical {
+  margin-top: 90px;
+  margin-bottom: 85px;
+}
