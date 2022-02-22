@@ -4,6 +4,7 @@
  */
 
 import { LogLevel } from "@azure/msal-browser";
+import RoleManagement from "./Pages/RoleManagement";
 
 /**
  * Configuration object to be passed to MSAL instance on creation.
@@ -63,7 +64,7 @@ export const loginRequest = {
  */
 export const protectedResources = {
     setRole:{
-        endpoint: "https://graph.microsoft.com/beta/users//appRoleAssignments", // GET gauni userio info su turimu roleID, POST gali prideti role
+        endpoint: `https://graph.microsoft.com/beta/users//appRoleAssignments`, // GET gauni userio info su turimu roleID, POST gali prideti role
         scope: ["AppRoleAssignment.ReadWrite.All"]
     },
     deleteRole: {

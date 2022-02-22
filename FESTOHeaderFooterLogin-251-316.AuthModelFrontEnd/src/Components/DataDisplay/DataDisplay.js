@@ -41,11 +41,6 @@ export const ProfileData = (props) => {
         tableRows.push(<option value={props.graphData.value[x].id}>{props.graphData.value[x].mail}</option>)
     }
 
-    // const userHandler = (event)=> {
-    //     setUserID(event.target.value)
-    // }
-    // console.log(userID)
-
     return (
         <>
             {tableRows}

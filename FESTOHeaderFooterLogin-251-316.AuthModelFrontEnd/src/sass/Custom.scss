@@ -38,7 +38,7 @@
 
     .headerHome{
       position: relative;
-      margin-right: 10px;
+      margin-right: 20px;
     }
 
     .active::after{
@@ -74,7 +74,12 @@
     }
   }
 }
-
+.den{
+  text-align: center;
+  .accessDen{
+    margin-bottom: 15%;
+  }
+}
 table{
   display: block;
   height:400px;
@@ -85,6 +90,7 @@ table{
     position: -webkit-sticky;
     top: 0;
     background-color: #e5e5e5;
+    z-index: 10;
     th:after,
     th:before {
       content: '';
@@ -103,14 +109,11 @@ table{
       border-bottom: 2px solid black;
     }
   }
-  td{
-    z-index: -1;
-  }
 }
-  .mailDiv{
-    width: 20%;
-    height: 625px;
-  }
+.mailDiv{
+  width: 20%;
+  height: 625px;
+}
 .h1test{
   text-align: center;
 }

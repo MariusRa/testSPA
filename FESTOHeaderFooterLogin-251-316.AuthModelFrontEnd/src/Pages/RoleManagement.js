@@ -3,8 +3,6 @@ import {Profile} from "./Profile";
 import {ListAppUsers, ListAppUsersR} from "./ListAppUsers";
 
 
-
-
 const RoleManagement = () => {
 
     const [userRole, setUserRole] = useState({
@@ -17,18 +15,15 @@ const RoleManagement = () => {
         setUserRole(prevState => {
             return {...prevState, principalId: event.target.value}
         })
-    }
-    console.log(userRole)
+    };
 
     const roleHandler = (event) => {
         setUserRole(prevState => {
             return {...prevState, appRoleId: event.target.value}
         })
-    }
+    };
 
     console.log(userRole)
-    const pvz = userRole.principalId
-    console.log(pvz)
 
     return(
         <div className={"container"}>
@@ -73,3 +68,4 @@ const RoleManagement = () => {
 }
 
 export default RoleManagement;
+
