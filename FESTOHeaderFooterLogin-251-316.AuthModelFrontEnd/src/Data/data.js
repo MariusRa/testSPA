@@ -88,7 +88,12 @@ const initialRequests = [
         target: "Work",
         semester: "Jan-Mar (I)",
         comments: "Willing to learn"
-    },
+    }
 ];
 
 export default initialRequests;
+
+
+
+
+

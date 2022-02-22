@@ -19,10 +19,10 @@ export const ReqApprove = () => {
     return (
         <div className={"container"}>
             <div>
-                <h4 className="testText"> New Request Approval</h4>
+                <h4 className="hText"> New Request Approval</h4>
             </div>
             <table className="table table-bordered table-striped square border">
-                <thead className=" text-center">
+                <thead className="text-center">
                 <tr>
                     <th width="15%">Person</th>
                     <th width="5%">Language</th>
@@ -33,7 +33,7 @@ export const ReqApprove = () => {
                     <th width="5%">Actions</th>
                 </tr>
                 </thead>
-                <tbody className="align-middle ">
+                <tbody className="align-middle">
                 {staticRequest}
                 </tbody>
             </table>
