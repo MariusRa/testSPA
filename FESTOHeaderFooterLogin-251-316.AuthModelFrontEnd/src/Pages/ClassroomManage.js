@@ -2,7 +2,7 @@
 export const ClassroomManage = () => {
     return (
         <div>
-            <h1>Klasiu Valdymas</h1>
+           <p>test</p>
         </div>)
 
 }
