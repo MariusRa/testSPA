@@ -4,7 +4,7 @@
  */
 
 import { LogLevel } from "@azure/msal-browser";
-import RoleManagement from "./Pages/RoleManagement";
+
 
 /**
  * Configuration object to be passed to MSAL instance on creation.
@@ -20,7 +20,7 @@ export const msalConfig = {
         navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
     },
     cache: {
-        cacheLocation: "sessionStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
+        cacheLocation: "localStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
     system: {
@@ -63,15 +63,6 @@ export const loginRequest = {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 export const protectedResources = {
-    setRole:{
-        endpoint: `https://graph.microsoft.com/beta/users//appRoleAssignments`, // GET gauni userio info su turimu roleID, POST gali prideti role
-        scope: ["AppRoleAssignment.ReadWrite.All"]
-    },
-    deleteRole: {
-        endpoint:"https://graph.microsoft.com/beta/users/fd262146-b53c-47b3-afc2-6484643c68d1/appRoleAssignments/RiEm_Ty1s0evwmSEZDxo0TSUVXB-0vpMtkNTEXBAqFQ",
-        //endpoint:"https://graph.microsoft.com/v1.0/servicePrincipals/070c38b3-d8cd-4aae-97b7-e49d01a98507/appRoleAssignedTo/fd262146-b53c-47b3-afc2-6484643c68d1",
-        scopes: ["AppRoleAssignment.ReadWrite.All"],
-    },
     graphMe: {
         endpoint: "https://graph.microsoft.com/beta/users?$top=50", // gauni userius is KITM AD
         //endpoint: "https://graph.microsoft.com/beta/users/a7faa43c-0917-4deb-a6a9-b78e568ab2fd/appRoleAssignments?$filter=resourceId eq 070c38b3-d8cd-4aae-97b7-e49d01a98507",
@@ -82,7 +73,7 @@ export const protectedResources = {
         scopes: ["api://e6bd4d2e-eda0-4d5c-8163-390ee6487bb7/access_as_user"], // e.g. api://xxxxxx/access_as_user
     },
     appUsers:{
-        endpoint: "https://graph.microsoft.com/beta/servicePrincipals/070c38b3-d8cd-4aae-97b7-e49d01a98507/appRoleAssignedTo", // duoda visus app userius
+        endpoint: "https://graph.microsoft.com/v1.0/servicePrincipals/070c38b3-d8cd-4aae-97b7-e49d01a98507/appRoleAssignedTo", // duoda visus app userius
         scopes: ["AppRoleAssignment.ReadWrite.All"]
     }
 }

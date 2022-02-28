@@ -11,8 +11,6 @@ import {NewRequest} from "../../Pages/NewRequest";
 import {LearningHistory} from "../../Pages/LearningHistory";
 import {ReqApprove} from "../../Pages/ReqApprove";
 import {ListAppUsers} from "../../Pages/ListAppUsers";
-import {SetUserRole} from "../../Pages/SetUserRole";
-import {DeleteRole} from "../../Pages/DeleteRole";
 import RoleManagement from "../../Pages/RoleManagement";
 
 const Pages = () => {
@@ -35,8 +33,6 @@ const Pages = () => {
             <Route path="/hello" element={ <Hello />}/>
             <Route path="/ReqApprove" element={ <ReqApprove />}/>
             <Route path="/ListAppUsers" element={ <ListAppUsers />}/>
-            <Route path="/setRole" element={<SetUserRole/>}/>
-            <Route path="/delete" element={<DeleteRole/>}/>
             <Route path="/role" element={<RoleManagement/>}/>
         </Routes>
     )}else if(role == "Requestor"){

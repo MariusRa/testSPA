@@ -3,44 +3,14 @@ import { protectedResources } from "../../authConfig";
 import Output from "../Output/Output";
 import React, {useState} from "react";
 
-// export const RoleAssignment = (props) => {
-//
-//
-//     const tableRows = props.RoleAssign
-//
-//     console.log(tableRows)
-//
-//     return (
-//         <>
-//             <div className="data-area-div">
-//                 <p>Calling <strong>Microsoft Graph API</strong>...</p>
-//                 <ul>
-//                     <li><strong>resource:</strong> <mark>User</mark> object</li>
-//                     <li><strong>endpoint:</strong> <mark>https://graph.microsoft.com/v1.0/users</mark></li>
-//                     <li><strong>scope:</strong> <mark>user.read</mark></li>
-//                 </ul>
-//                 <p>Contents of the <strong>response</strong> is below:</p>
-//             </div>
-//             <div className="data-area-div">
-//                 <div className={"overflow-scroll overflow-hidden roleDiv"}>
-//                     <ul>
-//                         {tableRows}
-//                     </ul>
-//                 </div>
-//             </div>
-//         </>
-//     );
-//
-// }
-
 export const ProfileData = (props) => {
     //const [userID, setUserID] = useState();
 
     let tableRows = [];
-      for (let x = 0; x <= 29; x++) {
-        tableRows.push(<option value={props.graphData.value[x].id}>{props.graphData.value[x].mail}</option>)
+      for (let x = 0; x < props.graphData.value.length; x++) {
+        tableRows.push(<option value={props.graphData.value[x].id} label={props.graphData.value[x].mail}/>)
     }
-
+    //console.log(tableRows)
     return (
         <>
             {tableRows}
@@ -52,62 +22,64 @@ export const ProfileData = (props) => {
 export const ListAppUsersData = (props) => {
     let roleId = [];
     let tableRows = [];
-    for (let x = 0; x < 10; x++) {
+    for (let x = 0; x < props.appData.value.length; x++) {
         roleId = props.appData.value[x].appRoleId;
 
         if (roleId == "05fb4daa-e373-46d8-82f6-16e8d1e93bfa"){
-        tableRows.push(<option value={props.appData.value[x].principalId}>{props.appData.value[x].principalDisplayName}</option>)
-    }}
-    //console.log(tableRows)
+        tableRows.push(<option id={props.appData.value[x].id} value={props.appData.value[x].principalId} label={props.appData.value[x].principalDisplayName}/>)
+    }};
+
+    console.log(tableRows)
+
     return (
-        <select multiple className="form-control formR" id="exampleFormControlSelect2" >
+        <>
             {tableRows}
-        </select>
+        </>
     )
 }
 
 export const ListAppUsersRData = (props) => {
     let roleId = [];
     let tableRows = [];
-    for (let x = 0; x < 10; x++) {
+    for (let x = 0; x < props.appData.value.length; x++) {
         roleId = props.appData.value[x].appRoleId;
-
+        console.log(roleId)
         if (roleId == "4d608750-8c60-4ee1-885c-f184562fdb8e"){
-            tableRows.push(<option>{props.appData.value[x].principalDisplayName}</option>)
+            tableRows.push(<option id={props.appData.value[x].id} value={props.appData.value[x].principalId} label={props.appData.value[x].principalDisplayName}/>)
         }}
-    //console.log(tableRows)
+    console.log(tableRows)
     return (
-        <select multiple className="form-control formR" id="exampleFormControlSelect2">
+        <>
             {tableRows}
-        </select>
+        </>
     )
 }
 
-export const UserRoleData = (props) => {
-
-    let tableRows = props.userRole.error.message;
-
-    console.log(tableRows)
-
-    return (
-        <>
-            <div className="data-area-div">
-                <p>Calling <strong>Microsoft Graph API</strong>...</p>
-                <ul>
-                    <li><strong>resource:</strong> <mark>App Users</mark> object</li>
-                </ul>
-                <p>Contents of the <strong>response</strong> is below:</p>
-            </div>
-            <div className="data-area-div">
-                <div className={"overflow-scroll overflow-hidden mailDiv"}>
-                    <ul>
-                        {tableRows}
-                    </ul>
-                </div>
-            </div>
-        </>
-    );
-}
+// export const UserRoleData = (props) => {
+//
+//     let tableRows = props.userRole.error.message;
+//
+//     console.log(tableRows)
+//
+//     return (
+//         <>
+//             <div className="data-area-div">
+//                 <p>Calling <strong>Microsoft Graph API</strong>...</p>
+//                 <ul>
+//                     <li><strong>resource:</strong> <mark>App Users</mark> object</li>
+//                 </ul>
+//                 <p>Contents of the <strong>response</strong> is below:</p>
+//             </div>
+//             <div className="data-area-div">
+//                 <div className={"overflow-scroll overflow-hidden mailDiv"}>
+//                     <ul>
+//                         {tableRows}
+//                     </ul>
+//                 </div>
+//             </div>
+//         </>
+//     );
+// }
 
 
 export const HelloData = (props) => {
