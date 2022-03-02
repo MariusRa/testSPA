@@ -48,11 +48,13 @@ export const ReqApprove = () => {
     const staticRequest = (requestList.map(
             req => <Request id={req.requestId}
                             person={req.studentName}
+                            personId={req.studentId}
                             language={req.language}
                             cost={req.costCenter}
                             target={req.target}
                             sem={req.semester}
                             com={req.comments}
+                            approve={req.approval}
             />))
 
     //console.log(staticRequest);

@@ -30,7 +30,8 @@ export const NewRequest = (props) => {
         CostCenter:'',
         Target:'',
         Semester:'',
-        Comments:''
+        Comments:'',
+        Approval: 'pending'
     });
 
     const bearer =`Bearer ${accessToken}`;
@@ -156,7 +157,8 @@ export const NewRequest = (props) => {
                 CostCenter:'',
                 Target: '',
                 Semester: '',
-                Comments:''
+                Comments:'',
+                Approval: 'pending'
             }
         })
     };
