@@ -7,6 +7,7 @@ import {Button, Modal} from "react-bootstrap";
 import {useMsal} from "@azure/msal-react";
 import {loginRequest} from "../authConfig";
 import Output from "../Components/Output/Output";
+import LangData from "../Data/languageData";
 
 export const NewRequest = (props) => {
 
@@ -14,33 +15,34 @@ export const NewRequest = (props) => {
     const [accessToken, setAccessToken] = useState(null);
     const [postInfo, setPostInfo] = useState(null);
 
-    const [langList, setLang] = useState([]);
-    const [targetList, setTarget] = useState([]);
-    const [semList, setSem] = useState([]);
+    const [langList, setLang] = useState(LangData);
+    const [targetList, setTarget] = useState(TargetData);
+    const [semList, setSem] = useState(SemData);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const [newRequest, setNewRequest] = useState({
-        principalId:'',
-        language:'',
-        costCenter:'',
-        target:'',
-        semester:'',
-        comments:''
+        StudentName:'',
+        StudentId:'',
+        Language:'',
+        CostCenter:'',
+        Target:'',
+        Semester:'',
+        Comments:''
     });
 
     const bearer =`Bearer ${accessToken}`;
-    const apiEndpoint = `https://localhost:44345/WeatherForecast`;
-    const apiEndpointS = `https://localhost:44345/api/request/semester`;
-    const apiEndpointT = `https://localhost:44345/api/request/target`;
-    const apiEndpointL = `https://localhost:44345/api/request/language`;
-    const optionsGet = {
-        method: "GET",
-        headers: {
-            'Authorization': bearer}
-    };
+    const apiEndpoint = `https://localhost:44345/api/request/newrequest`;
+    // const apiEndpointS = `https://localhost:44345/api/request/semester`;
+    // const apiEndpointT = `https://localhost:44345/api/request/target`;
+    // const apiEndpointL = `https://localhost:44345/api/request/language`;
+    // const optionsGet = {
+    //     method: "GET",
+    //     headers: {
+    //         'Authorization': bearer}
+    // };
 
     const options = {
         method: "POST",
@@ -68,30 +70,30 @@ export const NewRequest = (props) => {
         })
     }, []);
 
-    if (langList.length === 0) {
-        fetch(apiEndpointL, optionsGet)
-            .then(response => response.json())
-            .then(data => setLang(data))
-            .catch(error => console.log(error));
-    }
-    if (targetList.length === 0) {
-        fetch(apiEndpointT, optionsGet)
-            .then(response => response.json())
-            .then(data => setTarget(data))
-            .catch(error => console.log(error));
-    }
-    if (semList.length === 0) {
-        fetch(apiEndpointS, optionsGet)
-            .then(response => response.json())
-            .then(data => setSem(data))
-            .catch(error => console.log(error));
-    }
-
-    const staticTarget = targetList.map((we) => {return (<option value={we.id}>{we.target}</option>)})
-    const staticLang = langList.map((we) => {return (<option value={we.id}>{we.language}</option>)})
-    const staticSem = semList.map((we) => {return (<option value={we.id}>{we.semester}</option>)})
-
-    console.log(targetList)
+    // if (langList.length === 0) {
+    //     fetch(apiEndpointL, optionsGet)
+    //         .then(response => response.json())
+    //         .then(data => setLang(data))
+    //         .catch(error => console.log(error));
+    // }
+    // if (targetList.length === 0) {
+    //     fetch(apiEndpointT, optionsGet)
+    //         .then(response => response.json())
+    //         .then(data => setTarget(data))
+    //         .catch(error => console.log(error));
+    // }
+    // if (semList.length === 0) {
+    //     fetch(apiEndpointS, optionsGet)
+    //         .then(response => response.json())
+    //         .then(data => setSem(data))
+    //         .catch(error => console.log(error));
+    // }
+    //
+    const staticTarget = targetList.map((we) => {return (<option value={we.target} label={we.target}></option>)})
+    const staticLang = langList.map((we) => {return (<option value={we.language} label={we.language}></option>)})
+    const staticSem = semList.map((we) => {return (<option value={we.semester} label={we.semester}></option>)})
+    //
+    // console.log(targetList)
 
 
     // let staticTarget = [];
@@ -111,52 +113,54 @@ export const NewRequest = (props) => {
 
     const studHandler = (event) => {
         setNewRequest(prevState => {
-            return {...prevState, principalId: event.target.value}
+            return {...prevState, StudentId: event.target.value, StudentName: event.target[event.target.selectedIndex].id}
         })
     };
 
     const langHandler = (event) => {
         setNewRequest(prevState => {
-            return {...prevState, language: event.target.value}
+            return {...prevState, Language: event.target.value}
         })
     };
 
     const costHandler = (event) => {
         setNewRequest(prevState => {
-            return {...prevState,costCenter: event.target.value}
+            return {...prevState, CostCenter: event.target.value}
         })
     };
 
     const targetHandler = (event) => {
         setNewRequest(prevState => {
-            return {...prevState,target: event.target.value}
+            return {...prevState, Target: event.target.value}
         })
     };
 
     const semesterHandler = (event) => {
         setNewRequest(prevState => {
-            return {...prevState, semester: event.target.value}
+            return {...prevState, Semester: event.target.value}
         })
     };
 
     const comHandler = (event) => {
         setNewRequest(prevState => {
-            return {...prevState, comments: event.target.value}
+            return {...prevState, Comments: event.target.value}
         })
     };
 
     const clearInputs =()=> {
         setNewRequest(()=>{
             return {
-                principalId: '',
-                language: '',
-                costCenter:'',
-                target: '',
-                semester: '',
-                comments:''
+                StudentName: '',
+                StudentId: '',
+                Language: '',
+                CostCenter:'',
+                Target: '',
+                Semester: '',
+                Comments:''
             }
         })
     };
+
     const submitHandler =(event)=>{
         event.preventDefault();
         console.log(newRequest)
@@ -172,7 +176,7 @@ export const NewRequest = (props) => {
         clearInputs();
         //window.location.reload(false)
     };
-
+    console.log(newRequest)
 
     return(
         <div className={"container"}>
@@ -195,7 +199,7 @@ export const NewRequest = (props) => {
                     <div className="selectDiv col-sm ">
                         <div className="nRDiv form-group d-flex flex-row align-items-center">
                             <label className="col-4">Language</label>
-                                <select className="form-select w-50" value={newRequest.language} onChange={langHandler}>
+                                <select className="form-select w-50" value={newRequest.Language} onChange={langHandler}>
                                     <option value="">Select language</option>
                                     {staticLang}
                                 </select>
@@ -203,19 +207,19 @@ export const NewRequest = (props) => {
                         <div className="nRDiv form-group d-flex flex-row align-items-center">
                             <label className="col-4">Cost Center</label>
                             <div className="col-4 w-50">
-                                <input type="number" min="0" max="9999999999" className="form-control" id="inputList" value={newRequest.costCenter} onChange={costHandler}/>
+                                <input type="number" min="0" max="9999999999" className="form-control" id="inputList" value={newRequest.CostCenter} onChange={costHandler}/>
                             </div>
                         </div>
                         <div className="nRDiv form-group d-flex flex-row align-items-center">
                             <label className="col-4">Target</label>
-                            <select className="form-select w-50" value={newRequest.target} onChange={targetHandler}>
+                            <select className="form-select w-50" value={newRequest.Target} onChange={targetHandler}>
                                 <option value="">Select target</option>
                                 {staticTarget}
                             </select>
                         </div>
                         <div className="nRDiv form-group d-flex flex-row align-items-center">
                             <label className="col-4">Semester</label>
-                            <select className="form-select w-50" value={newRequest.semester} onChange={semesterHandler}>
+                            <select className="form-select w-50" value={newRequest.Semester} onChange={semesterHandler}>
                                 <option value="">Select semester</option>
                                 {staticSem}
                             </select>
@@ -224,7 +228,7 @@ export const NewRequest = (props) => {
                     <div className="col-sm buttonDiv">
                         <div className="nRCDiv form-group align-items-center">
                             <label className="hLabel">Comments</label>
-                            <textarea type="text" className="form-control commentForm" maxLength="150" value={newRequest.comments} onChange={comHandler}/>
+                            <textarea type="text" className="form-control commentForm" maxLength="150" value={newRequest.Comments} onChange={comHandler}/>
                         </div>
                         <div className="form-group">
                             <div className="nRCBDiv form-check">

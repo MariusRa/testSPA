@@ -18,7 +18,7 @@ export const PageLayout = (props) => {
         role.push(accounts[0] && accounts[0].idTokenClaims["roles"]);
     }
 
-    console.log(role);
+    //console.log(role);
 
 
     if (isAuthenticated) {

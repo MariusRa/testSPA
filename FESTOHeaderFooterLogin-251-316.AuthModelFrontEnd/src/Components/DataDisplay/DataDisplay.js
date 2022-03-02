@@ -8,7 +8,7 @@ export const ProfileData = (props) => {
 
     let tableRows = [];
       for (let x = 0; x < props.graphData.value.length; x++) {
-        tableRows.push(<option value={props.graphData.value[x].id} label={props.graphData.value[x].mail}/>)
+        tableRows.push(<option id={props.graphData.value[x].displayName} value={props.graphData.value[x].id} label={props.graphData.value[x].mail}/>)
     }
     //console.log(tableRows)
     return (

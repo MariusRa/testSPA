@@ -33,7 +33,7 @@ const LangData = [
     },
     {
         id: 9,
-        language: "Russian"
+        language: "Polish"
     },
     {
         id: 10,

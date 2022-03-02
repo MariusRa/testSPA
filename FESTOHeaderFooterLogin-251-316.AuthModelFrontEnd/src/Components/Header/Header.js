@@ -15,8 +15,8 @@ const Header = (props) =>{
     const isAuthenticated = useIsAuthenticated();
     const name = accounts[0] && accounts[0].name;
     const role = accounts[0] && accounts[0].idTokenClaims["roles"];
-    // const token = accounts[0] && accounts[0].idTokenClaims
-
+    //const token = accounts[0] && accounts[0].idTokenClaims
+    //console.log(token)
 if (isAuthenticated){
     return(
         <header>
