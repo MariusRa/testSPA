@@ -15,8 +15,7 @@ function handleLogin(instance) {
  */
 export const SignInButton = () => {
     const { instance } = useMsal();
-
     return (
-        <a href="#" className="logIn" onClick={() => handleLogin(instance)}><FontAwesomeIcon con className="UserIcon" icon={faUser}> </FontAwesomeIcon> Log in</a>
+        <a href="#" className="logIn" onClick={() => handleLogin(instance)}><FontAwesomeIcon className="UserIcon" icon={faUser}> </FontAwesomeIcon> Log in</a>
     );
 }

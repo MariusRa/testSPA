@@ -14,7 +14,7 @@ export const NewRequest = (props) => {
     const { instance, accounts} = useMsal();
     const [accessToken, setAccessToken] = useState(null);
     const [postInfo, setPostInfo] = useState(null);
-
+    const [searchTerm, setSearchTerm] = useState("")
     const [langList, setLang] = useState(LangData);
     const [targetList, setTarget] = useState(TargetData);
     const [semList, setSem] = useState(SemData);
@@ -25,6 +25,7 @@ export const NewRequest = (props) => {
 
     const [newRequest, setNewRequest] = useState({
         StudentName:'',
+        StudentEmail:'',
         StudentId:'',
         Language:'',
         CostCenter:'',
@@ -114,7 +115,7 @@ export const NewRequest = (props) => {
 
     const studHandler = (event) => {
         setNewRequest(prevState => {
-            return {...prevState, StudentId: event.target.value, StudentName: event.target[event.target.selectedIndex].id}
+            return {...prevState, StudentId: event.target.value, StudentName: event.target[event.target.selectedIndex].id, StudentEmail: event.target[event.target.selectedIndex].label}
         })
     };
 
@@ -152,6 +153,7 @@ export const NewRequest = (props) => {
         setNewRequest(()=>{
             return {
                 StudentName: '',
+                StudentEmail: '',
                 StudentId: '',
                 Language: '',
                 CostCenter:'',
@@ -176,17 +178,22 @@ export const NewRequest = (props) => {
     const deleteHandler =()=>{
         setShow(false);
         clearInputs();
-        //window.location.reload(false)
+    };
+
+    let searchHandler = (e) => {
+        let lowerCase = e.target.value.toLowerCase();
+        setSearchTerm(lowerCase);
+
     };
     console.log(newRequest)
 
     return(
         <div className={"container"}>
-            <div>
+            <div className="cTableHeader">
                 <h4 className="hText"> New Request</h4>
             </div>
             <div className="form-group search">
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search people"/>
+                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search people" value={searchTerm} onChange={searchHandler}/>
             </div>
             <form onSubmit={submitHandler}>
                 <div className="form-group row">
@@ -194,17 +201,17 @@ export const NewRequest = (props) => {
                         <div className="form-group">
                             <label className="hLabel"></label>
                             <select multiple className="form-control formU" onChange={studHandler}>
-                                <Profile/>
+                                <Profile reqInput={searchTerm}/>
                             </select>
                         </div>
                     </div>
                     <div className="selectDiv col-sm ">
                         <div className="nRDiv form-group d-flex flex-row align-items-center">
                             <label className="col-4">Language</label>
-                                <select className="form-select w-50" value={newRequest.Language} onChange={langHandler}>
-                                    <option value="">Select language</option>
-                                    {staticLang}
-                                </select>
+                            <select className="form-select w-50" value={newRequest.Language} onChange={langHandler}>
+                                <option value="">Select language</option>
+                                {staticLang}
+                            </select>
                         </div>
                         <div className="nRDiv form-group d-flex flex-row align-items-center">
                             <label className="col-4">Cost Center</label>
@@ -235,9 +242,9 @@ export const NewRequest = (props) => {
                         <div className="form-group">
                             <div className="nRCBDiv form-check">
                                 <input className="form-check-input" type="checkbox" value=""/>
-                                    <label className="form-check-label" htmlFor="defaultCheck1">
-                                        Would like to get notifications
-                                    </label>
+                                <label className="form-check-label" htmlFor="defaultCheck1">
+                                    Would like to get notifications
+                                </label>
                             </div>
                             <div className="nRBDiv btn-group align-self-center w-100">
                                 <button type="submit" className="btn btn-outline-secondary">Save</button>

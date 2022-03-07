@@ -9,12 +9,12 @@ export const StudTeachNav = () =>{
             <Navbar>
                 <PageLayout>
                     <div className="link-festo">
-                        <NavLink className={"headerHome"} activeClassName={"active"} to="/home">Home</NavLink>
+                        <NavLink className={"headerHome"} id={"home"} activeClassName={"active"} to="/home">Home</NavLink>
                     </div>
                     <AuthenticatedTemplate>
                         <div className="link-festo">
-                            <NavLink to="/LearningHistory" className="headerHome" activeClassName='active'>Learning History</NavLink>
-                            <NavLink to="/help" className="headerHome" activeClassName='active'>Help</NavLink>
+                            <NavLink to="/LearningHistory" id={"learnHis"} className="headerHome" activeClassName='active'>Learning History</NavLink>
+                            <NavLink to="/help" className="headerHome" id={"help"} activeClassName='active'>Help</NavLink>
                         </div>
                     </AuthenticatedTemplate>
                 </PageLayout>

@@ -20,6 +20,8 @@ const App = ({ instance }) => {
         <Router>
             <MsalProvider instance={instance}>
                 <PageLayout />
+
+
             </MsalProvider>
         </Router>
     );

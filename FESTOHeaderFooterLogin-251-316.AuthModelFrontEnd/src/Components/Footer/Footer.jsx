@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () =>{
 	return(
-		<footer className={"container-fluid"}>
+		<footer className={"container-fluid mt-auto"}>
 			{/* left footer */}
 			<div className="afooter container">
 			<div className="footer-left">

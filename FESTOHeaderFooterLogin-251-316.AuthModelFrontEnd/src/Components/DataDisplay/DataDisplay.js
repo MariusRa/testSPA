@@ -5,12 +5,22 @@ import React, {useState} from "react";
 
 export const ProfileData = (props) => {
     //const [userID, setUserID] = useState();
-
+    let names = [];
     let tableRows = [];
-      for (let x = 0; x < props.graphData.value.length; x++) {
-        tableRows.push(<option id={props.graphData.value[x].displayName} value={props.graphData.value[x].id} label={props.graphData.value[x].mail}/>)
+    for (let x = 0; x < props.graphData.value.length; x++) {
+        if (props.graphData.value[x].mail === null){
+
+        }else{
+            names = props.graphData.value[x].mail
+        }
+
+        if(names.includes(props.input) || names.includes(props.reqInput)){
+            if (names.includes("kitm")) {
+                tableRows.push(<option id={props.graphData.value[x].displayName} value={props.graphData.value[x].id} label={props.graphData.value[x].mail}></option>)
+            }
+        }
     }
-    //console.log(tableRows)
+
     return (
         <>
             {tableRows}
@@ -26,8 +36,8 @@ export const ListAppUsersData = (props) => {
         roleId = props.appData.value[x].appRoleId;
 
         if (roleId == "05fb4daa-e373-46d8-82f6-16e8d1e93bfa"){
-        tableRows.push(<option id={props.appData.value[x].id} value={props.appData.value[x].principalId} label={props.appData.value[x].principalDisplayName}/>)
-    }};
+            tableRows.push(<option id={props.appData.value[x].id} value={props.appData.value[x].principalId} label={props.appData.value[x].principalDisplayName}/>)
+        }};
 
     console.log(tableRows)
 

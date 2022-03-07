@@ -7,7 +7,7 @@ import { loginRequest, protectedResources } from "../authConfig";
 import { callApiWithToken } from "../fetch";
 import { ProfileData } from "../Components/DataDisplay/DataDisplay";
 
-const ProfileContent = () => {
+const ProfileContent = (props) => {
     /**
      * useMsal is hook that returns the PublicClientApplication instance,
      * an array of all accounts currently signed in and an inProgress value
@@ -44,7 +44,7 @@ const ProfileContent = () => {
 
     return (
         <>
-            { graphData ? <ProfileData graphData={graphData} /> : null }
+            { graphData ? <ProfileData graphData={graphData} input={props.input} reqInput={props.reqInput}/> : null }
         </>
     );
 };
@@ -56,17 +56,17 @@ const ProfileContent = () => {
  * to be passed to the login API, a component to display while authentication is in progress or a component to display if an error occurs. For more, visit:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md
  */
-export const Profile = () => {
+export const Profile = (props) => {
+
     const authRequest = {
         ...loginRequest
     };
-
     return (
         <MsalAuthenticationTemplate
             interactionType={InteractionType.Redirect}
             authenticationRequest={authRequest}
         >
-            <ProfileContent />
+            <ProfileContent input={props.input} reqInput={props.reqInput}/>
         </MsalAuthenticationTemplate>
     )
 };

@@ -1,7 +1,9 @@
 export const LearningHistory = () => {
     return (
-        <div>
-            <h1>Mokymosi Istorija</h1>
-        </div>)
-
+        <div className={"container"}>
+            <div className="cTableHeader">
+                <h4>Learning History</h4>
+            </div>
+        </div>
+    )
 }

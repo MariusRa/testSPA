@@ -11150,7 +11150,7 @@ textarea.form-control-lg {
 }
 .container-fluid header .headerHome, .container-sm header .headerHome, .container-md header .headerHome, .container-lg header .headerHome, .container-xl header .headerHome, .container-xxl header .headerHome {
   position: relative;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .container-fluid header .active::after, .container-sm header .active::after, .container-md header .active::after, .container-lg header .active::after, .container-xl header .active::after, .container-xxl header .active::after {
   content: "";
@@ -11184,6 +11184,13 @@ textarea.form-control-lg {
   vertical-align: 0;
 }
 
+.den {
+  text-align: center;
+}
+.den .accessDen {
+  margin-bottom: 15%;
+}
+
 table {
   display: block;
   height: 400px;
@@ -11195,6 +11202,7 @@ table thead {
   position: -webkit-sticky;
   top: 0;
   background-color: #e5e5e5;
+  z-index: 10;
 }
 table thead th:after,
 table thead th:before {
@@ -11210,9 +11218,6 @@ table thead th:before {
 table thead th:after {
   bottom: -1px;
   border-bottom: 2px solid black;
-}
-table td {
-  z-index: -1;
 }
 
 .mailDiv {

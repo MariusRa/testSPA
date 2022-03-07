@@ -12,9 +12,14 @@ import {NavLink} from "react-router-dom";
 export const NavigationBar = () => {
 
     const {accounts} = useMsal();
-    const role = [];
-    role.push((accounts[0] && accounts[0].idTokenClaims["roles"]));
-
+    // const role = accounts[0] && accounts[0].idTokenClaims["roles"][0];
+    let role = [];
+    if ((accounts[0] && accounts[0].idTokenClaims["roles"]) === undefined){
+        role.push('Guest');
+    }
+    else{
+        role.push(accounts[0] && accounts[0].idTokenClaims["roles"]);
+    }
 
     /**
      * Most applications will need to conditionally render certain components based on whether a user is signed in or not.
@@ -52,7 +57,7 @@ export const NavigationBar = () => {
                     <Navbar>
                         <PageLayout>
                             <div className="link-festo">
-                                <NavLink className={"headerHome"} activeClassName={"active"} to="/home">Home</NavLink>
+                                <NavLink id={"home"} className={"headerHome"} activeClassName={"active"} to="/home">Home</NavLink>
                             </div>
                         </PageLayout>
                     </Navbar>

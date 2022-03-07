@@ -64,7 +64,7 @@ export const loginRequest = {
  */
 export const protectedResources = {
     graphMe: {
-        endpoint: "https://graph.microsoft.com/beta/users?$top=50", // gauni userius is KITM AD
+        endpoint: "https://graph.microsoft.com/v1.0/users?$count=true&ConsistencyLevel=eventual&$filter=endswith(mail,'@kitm.lt') or endswith(mail,'@stud.kitm.lt')&$top=999", // gauni userius is KITM AD
         //endpoint: "https://graph.microsoft.com/beta/users/a7faa43c-0917-4deb-a6a9-b78e568ab2fd/appRoleAssignments?$filter=resourceId eq 070c38b3-d8cd-4aae-97b7-e49d01a98507",
         scopes: ["AppRoleAssignment.ReadWrite.All"],
     },
@@ -73,7 +73,7 @@ export const protectedResources = {
         scopes: ["api://e6bd4d2e-eda0-4d5c-8163-390ee6487bb7/access_as_user"], // e.g. api://xxxxxx/access_as_user
     },
     appUsers:{
-        endpoint: "https://graph.microsoft.com/v1.0/servicePrincipals/070c38b3-d8cd-4aae-97b7-e49d01a98507/appRoleAssignedTo", // duoda visus app userius
+        endpoint: "https://graph.microsoft.com/v1.0/servicePrincipals/070c38b3-d8cd-4aae-97b7-e49d01a98507/appRoleAssignedTo?$top=999", // duoda visus app userius
         scopes: ["AppRoleAssignment.ReadWrite.All"]
     }
 }

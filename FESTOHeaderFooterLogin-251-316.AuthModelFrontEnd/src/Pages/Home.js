@@ -1,7 +1,9 @@
 export const Home = () => {
     return(
         <div className={"container"}>
-            <h1>This is Home page</h1>
+            <div className="cTableHeader">
+                <h4>This is Home page</h4>
+            </div>
             <p className="testText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi facere officiis sunt. Dolor eligendi harum illum in ipsa, itaque iusto magnam maxime molestiae pariatur perferendis, qui quis reiciendis reprehenderit soluta.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae illo rerum tenetur voluptatem. Aliquam autem blanditiis consequuntur cum deserunt ea est ex fuga illo, illum ipsum nisi saepe voluptatibus!
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, debitis dolor dolorem et, labore magni maxime mollitia neque nisi provident qui quis voluptas? Distinctio esse odio, quisquam repudiandae similique sunt?

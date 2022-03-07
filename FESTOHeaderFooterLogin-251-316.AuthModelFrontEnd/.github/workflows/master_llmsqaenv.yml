@@ -1,7 +1,8 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
- 
-name: Build and deploy Node.js app to Azure Web App - lunoru
- 
+
+name: Build and deploy ASP app to Azure Web App - LlmsQaEnv
+
 on:
   push:
     branches:
@@ -28,27 +29,27 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
+          name: ASP-app
           path: ./build
- 
+          
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
- 
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: node-app
- 
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
+          name: ASP-app
+
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
         with:
           app-name: 'LlmsQaEnv'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_47B0E527D37E4AB093896142AF7D38E6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1211C07765244CFE90048BDB8C3E2F97 }}
           package: .
