@@ -1,18 +1,58 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import initialClass from "../Data/class";
 import Class from "../Components/Output/Class";
+import {useMsal} from "@azure/msal-react";
+import {loginRequest} from "../authConfig";
 
 export const ClassroomsTable = () => {
-    const [classList, setClassList] = useState(initialClass);
+    const { instance, accounts} = useMsal();
+    const [accessToken, setAccessToken] = useState(null);
+
+    const [classList, setClassList] = useState([]);
+
+    const bearer =`Bearer ${accessToken}`;
+    const apiEndpoint = `https://localhost:44345/api/classroom/`;
+
+    const optionsGet = {
+        method: "GET",
+        headers: {
+            'Authorization': bearer}
+    };
+
+    const request = {
+        ...loginRequest,
+        account: accounts[0],
+        scopes: ["api://e6bd4d2e-eda0-4d5c-8163-390ee6487bb7/access_as_user"]
+    };
+
+    // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+    useEffect (()=>{
+        instance.acquireTokenSilent(request).then((response) => {
+            setAccessToken(response.accessToken);
+        }).catch((e) => {
+            instance.acquireTokenPopup(request).then((response) => {
+                setAccessToken(response.accessToken);
+            });
+        })
+    }, []);
+
+    if (classList.length === 0) {
+        fetch(apiEndpoint, optionsGet)
+            .then(response => response.json())
+            .then(data => setClassList(data))
+            .catch(error => console.log(error));
+    }
 
     const staticClass = classList.map(room => <Class
-                                        id={room.id}
-                                        lang={room.Language}
-                                        count={room.StudentCount}
-                                        teacher={room.Teacher}
-                                        level={room.Level}
-                                        isActive={room.IsActive}
+                                        id={room.classroomId}
+                                        lang={room.language}
+                                        users={room.users}
+                                        level={room.languageLevel}
+                                        isActive={room.isActive}
     />)
+    console.log(classList)
+    console.log(staticClass)
+
     return (
     <div className={"container"}>
         <div className="cTableHeader d-flex flex-row justify-content-between align-items-center">

@@ -11,11 +11,11 @@ const Class = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [approval, setApproval] = useState({
+    const [active, setActive] = useState({
         isActive: false
     })
     const bearer =`Bearer ${accessToken}`;
-    const apiEndpointPut = `https://localhost:44345/api/class/${props.id}`;
+    const apiEndpointPut = `https://localhost:44345/api/classroom/${props.id}`;
 
     const optionsPut = {
         method: "PUT",
@@ -23,7 +23,7 @@ const Class = (props) => {
             'Authorization': bearer,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(approval)
+        body: JSON.stringify(active)
     };
 
     const request = {
@@ -57,6 +57,22 @@ const Class = (props) => {
     const editHandler = () => {
         window.location.href='editClass'
     };
+
+    let student = [];
+    for (let x =0; x < props.users.length; x++){
+        if(props.users[x].userRole === "Student"){
+            student.push(props.users[x].userName);
+        }
+    }
+    console.log(student);
+
+    let teacher = [];
+    for (let x =0; x < props.users.length; x++){
+        if(props.users[x].userRole === "Teacher"){
+            teacher.push(props.users[x].userName);
+        }
+    }
+    console.log(teacher);
 
     let actions;
     if(props.isActive === true){
@@ -115,8 +131,8 @@ const Class = (props) => {
     return(
         <tr>
             <td>{props.lang}</td>
-            <td className="text-center">{props.count}</td>
-            <td>{props.teacher}</td>
+            <td className="text-center">{student.length}</td>
+            <td>{teacher}</td>
             <td className="text-center">{props.level}</td>
             {actions}
         </tr>
