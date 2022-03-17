@@ -48,7 +48,7 @@ const Pages = () => {
             <Route path="/role" element={<RoleManagement/>}/>
             <Route path="/class" element={<ClassroomsTable/>}/>
             <Route path="/newClass" element={<NewClass/>}/>
-            <Route path="/editClass" element={<EditClass/>}/>
+            <Route path="/editClass/:id" element={<EditClass/>}/>
         </Routes>
 
     )}else if(role == "Requestor"){

@@ -55,7 +55,7 @@ const Class = (props) => {
     };
 
     const editHandler = () => {
-        window.location.href='editClass'
+        window.location.href=`editClass/${props.id}`
     };
 
     let student = [];
@@ -64,7 +64,7 @@ const Class = (props) => {
             student.push(props.users[x].userName);
         }
     }
-    console.log(student);
+    //console.log(student);
 
     let teacher = [];
     for (let x =0; x < props.users.length; x++){
@@ -72,7 +72,7 @@ const Class = (props) => {
             teacher.push(props.users[x].userName);
         }
     }
-    console.log(teacher);
+    //console.log(teacher);
 
     let actions;
     if(props.isActive === true){
@@ -104,7 +104,7 @@ const Class = (props) => {
     else if (props.isActive === false){
         actions =
             <td className="btn-group w-100">
-                <button className="btn btn-outline-secondary disabled">Edit</button>
+                <button className="btn btn-outline-secondary disabled" >Edit</button>
                 <button className="btn btn-outline-secondary disabled" onClick={handleShow}>Delete</button>
                 <Modal
                     show={show}

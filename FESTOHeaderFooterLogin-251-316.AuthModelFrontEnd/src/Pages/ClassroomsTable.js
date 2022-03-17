@@ -50,8 +50,9 @@ export const ClassroomsTable = () => {
                                         level={room.languageLevel}
                                         isActive={room.isActive}
     />)
-    console.log(classList)
-    console.log(staticClass)
+
+    // console.log(classList)
+    // console.log(staticClass)
 
     return (
     <div className={"container"}>

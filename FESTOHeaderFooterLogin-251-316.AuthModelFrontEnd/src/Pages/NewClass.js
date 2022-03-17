@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from "react";
+
 import {Button, Modal} from "react-bootstrap";
 import LangData from "../Data/languageData";
 import languageLevelData from "../Data/languageLevelData";
 import {useMsal} from "@azure/msal-react";
 import {loginRequest} from "../authConfig";
+import {ListAppUsers} from "./ListAppUsers";
 
 
 const NewClass = () => {
     const { instance, accounts} = useMsal();
     const [accessToken, setAccessToken] = useState(null);
+    const [postInfo, setPostInfo] = useState(null);
 
     const [langList, setLang] = useState(LangData);
     const [levelList, setLevel] = useState(languageLevelData);
@@ -21,8 +24,18 @@ const NewClass = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [classroom, setClassroom] = useState({
+        ClassroomId: "",
+        Language:"",
+        LanguageLevel:"",
+        IsActive: true,
+        Users: []
+      });
+
+
     const bearer =`Bearer ${accessToken}`;
     const apiEndpoint = `https://localhost:44345/api/user/getusers`;
+    const apiEndpointPost = 'https://localhost:44345/api/classroom/newclassroom'
 
     const optionsGet = {
         method: "GET",
@@ -30,10 +43,19 @@ const NewClass = () => {
             'Authorization': bearer}
     };
 
+    const optionsPost = {
+        method: "POST",
+        headers: {
+            'Authorization': bearer,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(classroom)
+    };
+
     const request = {
         ...loginRequest,
         account: accounts[0],
-        scopes: ["api://e6bd4d2e-eda0-4d5c-8163-390ee6487bb7/access_as_user"]
+        //scopes: ["api://e6bd4d2e-eda0-4d5c-8163-390ee6487bb7/access_as_user"]
     };
 
     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
@@ -73,10 +95,62 @@ const NewClass = () => {
         setSearchTerm(event.target.value);
     };
 
-    const saveHandler = () => {
-        window.location.href='class'
+    const langHandler = (event) => {
+        setClassroom(prevState => {
+            return {...prevState, ClassroomId: Math.random().toString(), Language: event.target.value}
+        })
     };
 
+    const levelHandler = (event) => {
+        setClassroom(prevState => {
+            return {...prevState, LanguageLevel: event.target.value}
+        })
+    };
+
+    const userHandler = (event) => {
+        const userId = event.target.value
+        const userName = event.target[event.target.selectedIndex].label
+        const userRole = event.target[event.target.selectedIndex].id
+        setClassroom(prevState => {
+            return{...prevState, Users: [...prevState.Users, {userId, userName, userRole}]}
+        })
+    }
+
+    const delHandler = (event) => {
+        const userId = event.target.value
+        console.log(userId)
+
+        setClassroom({...classroom, Users: classroom.Users.filter((x => x.userId !== userId))})
+    }
+
+
+    let student = [];
+    for (let x =0; x < classroom.Users.length; x++){
+        if(classroom.Users[x].userRole === "Student"){
+            student.push(<option id={classroom.Users[x].userRole} value={classroom.Users[x].userId} label={classroom.Users[x].userName}></option>);
+        }
+    }
+
+    let teacher = [];
+    for (let x =0; x < classroom.Users.length; x++){
+        if(classroom.Users[x].userRole === "Teacher"){
+            teacher.push(<option id={classroom.Users[x].userRole} value={classroom.Users[x].userId} label={classroom.Users[x].userName}></option>);
+        }
+    }
+
+    const [fetchStatus, setFetchStatus] = useState(false)
+    const saveHandler = () => {
+        setFetchStatus(true)
+    };
+
+    if (fetchStatus == true){
+        fetch(apiEndpointPost, optionsPost)
+            .then(response => response.json())
+            .then(data=>setPostInfo(data))
+            .catch(error => console.log(error));
+        setFetchStatus(false)
+        window.location.href='class'
+    }
 
     return (
         <div className={"container"}>
@@ -87,14 +161,14 @@ const NewClass = () => {
                 <div className="col-sm ">
                     <div className="classSDiv form-group  align-items-center">
                         <label className="hLabel col-8">Language</label>
-                        <select className="form-select w-75">
+                        <select className="form-select w-75" value={classroom.Language} onChange={langHandler}>
                             <option value="">Select language</option>
                             {staticLang}
                         </select>
                     </div>
                     <div className="form-group  align-items-center">
                         <label className="hLabel col-8">Language level</label>
-                        <select className="form-select w-50">
+                        <select className="form-select w-50" value={classroom.LanguageLevel} onChange={levelHandler} required>
                             <option value="">Select level</option>
                             {staticLevel}
                         </select>
@@ -106,7 +180,7 @@ const NewClass = () => {
                     </div>
                     <div className="form-group">
                         <label className="hLabel"></label>
-                        <select multiple className="form-control formU">
+                        <select multiple className="form-control formU" onChange={userHandler}>
                             {staticRequest}
                         </select>
                     </div>
@@ -124,14 +198,14 @@ const NewClass = () => {
                 <div className="col-sm">
                     <div className="form-group classForm">
                         <label className="hLabel">Students</label>
-                        <select multiple className="form-control formR">
-                            {}
+                        <select multiple className="form-control formR" onChange={delHandler}>
+                            {student}
                         </select>
                     </div>
                     <div className="form-group">
                         <label className="hLabel">Teachers</label>
-                        <select multiple className="form-control formR">
-                            {}
+                        <select multiple className="form-control formR" onChange={delHandler}>
+                            {teacher}
                         </select>
                     </div>
                     <div className="nRBDiv btn-group align-self-center w-100">
